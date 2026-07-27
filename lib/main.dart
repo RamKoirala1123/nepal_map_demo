@@ -197,14 +197,27 @@ class _FullDemoPageState extends State<FullDemoPage> {
         _controller.addCoverageLayer(const CoverageLayer(
           id: 'bank_branches',
           name: 'Bank Branches',
-          districtIds: ['kathmandu', 'lalitpur', 'bhaktapur', 'chitwan', 'biratnagar', 'pokhara'],
+          districtIds: [
+            'kathmandu',
+            'lalitpur',
+            'bhaktapur',
+            'chitwan',
+            'biratnagar',
+            'pokhara'
+          ],
           color: Color(0xFF0284C7),
           opacity: 0.35,
         ));
         _controller.addCoverageLayer(const CoverageLayer(
           id: 'delivery_zones',
           name: 'Delivery Zones',
-          districtIds: ['kathmandu', 'lalitpur', 'bhaktapur', 'dhading', 'nuwakot'],
+          districtIds: [
+            'kathmandu',
+            'lalitpur',
+            'bhaktapur',
+            'dhading',
+            'nuwakot'
+          ],
           color: Colors.orange,
           opacity: 0.3,
         ));
@@ -283,11 +296,14 @@ class _FullDemoPageState extends State<FullDemoPage> {
             baseColor: widget.isDark ? const Color(0xFF1E293B) : Colors.white,
             selectedColor: const Color(0xFFBAE6FD),
             hoverColor: const Color(0xFFE0F2FE),
-            borderColor: widget.isDark ? const Color(0xFF334155) : const Color(0xFFCBD5E1),
+            borderColor: widget.isDark
+                ? const Color(0xFF334155)
+                : const Color(0xFFCBD5E1),
             borderWidth: 1.0,
           ),
           tooltipStyle: TooltipStyle(
-            backgroundColor: widget.isDark ? const Color(0xFF1E293B) : Colors.white,
+            backgroundColor:
+                widget.isDark ? const Color(0xFF1E293B) : Colors.white,
             textColor: widget.isDark ? Colors.white : Colors.black87,
             borderRadius: 6,
             elevation: 2,
@@ -307,7 +323,9 @@ class _FullDemoPageState extends State<FullDemoPage> {
       case 2:
         return NepalMapTheme(
           colors: NepalMapColors(
-            baseColor: widget.isDark ? const Color(0xFF451A03) : const Color(0xFFFFF7ED),
+            baseColor: widget.isDark
+                ? const Color(0xFF451A03)
+                : const Color(0xFFFFF7ED),
             selectedColor: const Color(0xFFFED7AA),
             hoverColor: const Color(0xFFFFEDD5),
             borderColor: const Color(0xFFF97316),
@@ -357,7 +375,12 @@ class _FullDemoPageState extends State<FullDemoPage> {
       final selectedId = _controller.selectedDistricts.first;
       final district = _allDistricts.firstWhere(
         (d) => d.id == selectedId,
-        orElse: () => NepalDistrict(id: selectedId, name: selectedId, headquarter: '', provinceNumber: 0, rings: []),
+        orElse: () => NepalDistrict(
+            id: selectedId,
+            name: selectedId,
+            headquarter: '',
+            provinceNumber: 0,
+            rings: []),
       );
 
       final rich = _districtDetails[district.id];
@@ -371,7 +394,8 @@ class _FullDemoPageState extends State<FullDemoPage> {
               Expanded(
                 child: Text(
                   district.name,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 15),
                 ),
               ),
               IconButton(
@@ -383,23 +407,32 @@ class _FullDemoPageState extends State<FullDemoPage> {
             ],
           ),
           const Divider(height: 12),
-          Text('Province: ${district.provinceNumber}', style: const TextStyle(fontSize: 12)),
+          Text('Province: ${district.provinceNumber}',
+              style: const TextStyle(fontSize: 12)),
           if (district.headquarter.isNotEmpty)
-            Text('Headquarters: ${district.headquarter}', style: const TextStyle(fontSize: 12)),
+            Text('Headquarters: ${district.headquarter}',
+                style: const TextStyle(fontSize: 12)),
           if (rich != null) ...[
-            Text('Key Attraction: ${rich['attraction']}', style: const TextStyle(fontSize: 12)),
-            Text('Elevation: ${rich['altitude']}', style: const TextStyle(fontSize: 12)),
+            Text('Key Attraction: ${rich['attraction']}',
+                style: const TextStyle(fontSize: 12)),
+            Text('Elevation: ${rich['altitude']}',
+                style: const TextStyle(fontSize: 12)),
             const SizedBox(height: 6),
             Text(
               rich['fact']!,
-              style: const TextStyle(fontSize: 11, fontStyle: FontStyle.italic, color: Colors.grey),
+              style: const TextStyle(
+                  fontSize: 11,
+                  fontStyle: FontStyle.italic,
+                  color: Colors.grey),
             ),
           ],
         ],
       );
-    } else if (mode.isProvinceMode && _controller.selectedProvinces.isNotEmpty) {
+    } else if (mode.isProvinceMode &&
+        _controller.selectedProvinces.isNotEmpty) {
       final pNum = _controller.selectedProvinces.first;
-      final dists = _allDistricts.where((d) => d.provinceNumber == pNum).toList();
+      final dists =
+          _allDistricts.where((d) => d.provinceNumber == pNum).toList();
 
       return Column(
         mainAxisSize: MainAxisSize.min,
@@ -410,7 +443,8 @@ class _FullDemoPageState extends State<FullDemoPage> {
               Expanded(
                 child: Text(
                   'Province $pNum',
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 15),
                 ),
               ),
               IconButton(
@@ -422,7 +456,8 @@ class _FullDemoPageState extends State<FullDemoPage> {
             ],
           ),
           const Divider(height: 12),
-          Text('Total Districts: ${dists.length}', style: const TextStyle(fontSize: 12)),
+          Text('Total Districts: ${dists.length}',
+              style: const TextStyle(fontSize: 12)),
           const SizedBox(height: 6),
           Wrap(
             spacing: 4,
@@ -436,7 +471,8 @@ class _FullDemoPageState extends State<FullDemoPage> {
                   });
                 },
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                   decoration: BoxDecoration(
                     color: Colors.blue.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(4),
@@ -456,6 +492,131 @@ class _FullDemoPageState extends State<FullDemoPage> {
     return const SizedBox.shrink();
   }
 
+  Widget _buildMobileToolbar(bool isDark) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Mode selector as a compact dropdown
+          DropdownButton<NepalSelectionMode>(
+            value: _controller.mode,
+            underline: const SizedBox.shrink(),
+            items: NepalSelectionMode.values.map((mode) {
+              return DropdownMenuItem(
+                value: mode,
+                child:
+                    Text(_labelFor(mode), style: const TextStyle(fontSize: 11)),
+              );
+            }).toList(),
+            onChanged: (value) {
+              if (value != null) _setMode(value);
+            },
+          ),
+          const SizedBox(width: 8),
+          // Overlay toggles
+          IconButton(
+            icon: Icon(_showLayers ? Icons.layers : Icons.layers_outlined,
+                size: 20),
+            onPressed: _toggleCoverageLayers,
+            tooltip: 'Layers',
+            color: _showLayers ? Colors.blue : null,
+            constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+            padding: const EdgeInsets.all(4),
+          ),
+          IconButton(
+            icon: Icon(
+                _showHeatmap
+                    ? Icons.local_fire_department
+                    : Icons.local_fire_department_outlined,
+                size: 20),
+            onPressed: _toggleHeatmap,
+            tooltip: 'Heatmap',
+            color: _showHeatmap ? Colors.blue : null,
+            constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+            padding: const EdgeInsets.all(4),
+          ),
+          IconButton(
+            icon: Icon(_showMarkers ? Icons.place : Icons.place_outlined,
+                size: 20),
+            onPressed: _toggleMarkers,
+            tooltip: 'Markers',
+            color: _showMarkers ? Colors.blue : null,
+            constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+            padding: const EdgeInsets.all(4),
+          ),
+          const SizedBox(width: 4),
+          // Theme cycle button
+          IconButton(
+            icon: const Icon(Icons.palette_outlined, size: 20),
+            onPressed: _cycleTheme,
+            tooltip: 'Theme: ${_themeLabels[_themeIndex]}',
+            constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+            padding: const EdgeInsets.all(4),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDesktopToolbar(bool isDark) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Wrap(
+          spacing: 12,
+          runSpacing: 8,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            const Text('Mode:',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+            ...NepalSelectionMode.values.map((mode) {
+              final active = _controller.mode == mode;
+              return ChoiceChip(
+                label:
+                    Text(_labelFor(mode), style: const TextStyle(fontSize: 11)),
+                selected: active,
+                onSelected: (_) => _setMode(mode),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              );
+            }),
+            const SizedBox(width: 8),
+            const Text('Overlays:',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+            FilterChip(
+              label: const Text('Layers', style: TextStyle(fontSize: 11)),
+              selected: _showLayers,
+              onSelected: (_) => _toggleCoverageLayers(),
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+            ),
+            FilterChip(
+              label: const Text('Heatmap', style: TextStyle(fontSize: 11)),
+              selected: _showHeatmap,
+              onSelected: (_) => _toggleHeatmap(),
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+            ),
+            FilterChip(
+              label: const Text('Markers', style: TextStyle(fontSize: 11)),
+              selected: _showMarkers,
+              onSelected: (_) => _toggleMarkers(),
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+            ),
+            const SizedBox(width: 8),
+            const Text('Theme:',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+            ActionChip(
+              label: Text(_themeLabels[_themeIndex],
+                  style: const TextStyle(fontSize: 11)),
+              onPressed: _cycleTheme,
+              avatar: const Icon(Icons.palette_outlined, size: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final isDark = widget.isDark;
@@ -466,7 +627,8 @@ class _FullDemoPageState extends State<FullDemoPage> {
           crossAxisAlignment: WrapCrossAlignment.center,
           spacing: 8,
           children: [
-            const Text('Nepal Map - Demo', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            const Text('Nepal Map - Demo',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
             _ShieldBadge(
               label: 'pub',
               status: 'v0.1.0',
@@ -491,283 +653,188 @@ class _FullDemoPageState extends State<FullDemoPage> {
           ),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // Top Navigation Toolbar
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            decoration: BoxDecoration(
-              color: isDark ? const Color(0xFF1E293B) : Colors.white,
-              border: Border(
-                bottom: BorderSide(
-                  color: isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0),
-                  width: 1,
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final isMobile = constraints.maxWidth < 600;
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Top Navigation Toolbar
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: isMobile ? 8.0 : 16.0,
+                  vertical: isMobile ? 4.0 : 8.0,
                 ),
+                decoration: BoxDecoration(
+                  color: isDark ? const Color(0xFF1E293B) : Colors.white,
+                  border: Border(
+                    bottom: BorderSide(
+                      color: isDark
+                          ? const Color(0xFF334155)
+                          : const Color(0xFFE2E8F0),
+                      width: 1,
+                    ),
+                  ),
+                ),
+                child: isMobile
+                    ? _buildMobileToolbar(isDark)
+                    : _buildDesktopToolbar(isDark),
               ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Wrap(
-                  spacing: 12,
-                  runSpacing: 8,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  children: [
-                    const Text('Mode:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
-                    ...NepalSelectionMode.values.map((mode) {
-                      final active = _controller.mode == mode;
-                      return ChoiceChip(
-                        label: Text(_labelFor(mode), style: const TextStyle(fontSize: 11)),
-                        selected: active,
-                        onSelected: (_) => _setMode(mode),
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                      );
-                    }),
-                    const SizedBox(width: 8),
-                    const Text('Overlays:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
-                    FilterChip(
-                      label: const Text('Layers', style: TextStyle(fontSize: 11)),
-                      selected: _showLayers,
-                      onSelected: (_) => _toggleCoverageLayers(),
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                    ),
-                    FilterChip(
-                      label: const Text('Heatmap', style: TextStyle(fontSize: 11)),
-                      selected: _showHeatmap,
-                      onSelected: (_) => _toggleHeatmap(),
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                    ),
-                    FilterChip(
-                      label: const Text('Markers', style: TextStyle(fontSize: 11)),
-                      selected: _showMarkers,
-                      onSelected: (_) => _toggleMarkers(),
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                    ),
-                    const SizedBox(width: 8),
-                    const Text('Theme:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
-                    ActionChip(
-                      label: Text(_themeLabels[_themeIndex], style: const TextStyle(fontSize: 11)),
-                      onPressed: _cycleTheme,
-                      avatar: const Icon(Icons.palette_outlined, size: 12),
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                    ),
-                  ],
-                ),
-                if (!_loadingDistricts) ...[
-                  const SizedBox(height: 8),
-                  // Row(
-                  //   children: [
-                  //     // Expanded(
-                  //     //   child: Container(
-                  //     //     height: 36,
-                  //     //     child: TextField(
-                  //     //       controller: _searchController,
-                  //     //       focusNode: _searchFocusNode,
-                  //     //       decoration: InputDecoration(
-                  //     //         hintText: 'Search district...',
-                  //     //         prefixIcon: const Icon(Icons.search, size: 14),
-                  //     //         suffixIcon: _searchQuery.isNotEmpty
-                  //     //             ? IconButton(
-                  //     //                 icon: const Icon(Icons.clear, size: 12),
-                  //     //                 onPressed: () {
-                  //     //                   setState(() {
-                  //     //                     _searchController.clear();
-                  //     //                     _searchQuery = '';
-                  //     //                   });
-                  //     //                 },
-                  //     //                 padding: EdgeInsets.zero,
-                  //     //                 constraints: const BoxConstraints(),
-                  //     //               )
-                  //     //             : null,
-                  //     //         isDense: true,
-                  //     //         contentPadding: const EdgeInsets.symmetric(vertical: 8),
-                  //     //         border: OutlineInputBorder(
-                  //     //           borderRadius: BorderRadius.circular(6),
-                  //     //         ),
-                  //     //       ),
-                  //     //       onChanged: (val) {
-                  //     //         setState(() {
-                  //     //           _searchQuery = val;
-                  //     //         });
-                  //     //       },
-                  //     //       style: const TextStyle(fontSize: 12),
-                  //     //     ),
-                  //     //   ),
-                  //     // ),
-                  //   ],
-                  // ),
-                  if (_searchQuery.isNotEmpty)
-                    Container(
-                      constraints: const BoxConstraints(maxHeight: 180),
-                      margin: const EdgeInsets.only(top: 4),
-                      decoration: BoxDecoration(
-                        color: isDark ? const Color(0xFF1E293B) : Colors.white,
-                        borderRadius: BorderRadius.circular(6),
-                        border: Border.all(color: Colors.grey.withOpacity(0.2)),
-                        boxShadow: const [
-                          BoxShadow(color: Colors.black12, blurRadius: 4),
-                        ],
+
+              // Map Area - give more flex on mobile
+              Expanded(
+                flex: isMobile ? 3 : 1,
+                child: Container(
+                  padding: EdgeInsets.all(isMobile ? 8.0 : 16.0),
+                  child: Stack(
+                    children: [
+                      NepalMapWidget(
+                        controller: _controller,
+                        theme: _getTheme(),
+                        onDistrictTap: (district) {
+                          setState(() {
+                            _lastEvent = 'Tapped: ${district.name}';
+                          });
+                        },
+                        onProvinceTap: (pNum, _) {
+                          setState(() {
+                            _lastEvent = 'Province $pNum Tapped';
+                          });
+                        },
+                        onDistrictHover: (district) {
+                          setState(() {
+                            _hovered = district?.name;
+                          });
+                        },
                       ),
-                      child: _filteredDistricts.isEmpty
-                          ? const Padding(
-                              padding: EdgeInsets.all(12.0),
-                              child: Text('No results', style: TextStyle(fontSize: 12, color: Colors.grey)),
-                            )
-                          : ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: _filteredDistricts.length,
-                              itemBuilder: (context, index) {
-                                final dist = _filteredDistricts[index];
-                                return ListTile(
-                                  title: Text(dist.name, style: const TextStyle(fontSize: 12)),
-                                  subtitle: Text('Province ${dist.provinceNumber}', style: const TextStyle(fontSize: 10)),
-                                  dense: true,
-                                  onTap: () => _selectDistrictFromSearch(dist),
-                                );
-                              },
+
+                      // Floating Legend on Map (only when overlays active)
+                      if (_showLayers || _showHeatmap)
+                        Positioned(
+                          bottom: 8,
+                          left: 8,
+                          child: Container(
+                            width: 180,
+                            decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(color: Colors.black12, blurRadius: 4),
+                              ],
+                              borderRadius: BorderRadius.circular(8),
                             ),
-                    ),
-                ],
-              ],
-            ),
-          ),
-
-          // Map Area
-          Expanded(
-            flex: 1,
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              child: Stack(
-                children: [
-                  NepalMapWidget(
-                    controller: _controller,
-                    theme: _getTheme(),
-                    onDistrictTap: (district) {
-                      setState(() {
-                        _lastEvent = 'Tapped: ${district.name}';
-                      });
-                    },
-                    onProvinceTap: (pNum, _) {
-                      setState(() {
-                        _lastEvent = 'Province $pNum Tapped';
-                      });
-                    },
-                    onDistrictHover: (district) {
-                      setState(() {
-                        _hovered = district?.name;
-                      });
-                    },
-                  ),
-
-                  // Floating Legend on Map (only when overlays active)
-                  if (_showLayers || _showHeatmap)
-                    Positioned(
-                      bottom: 8,
-                      left: 8,
-                      child: Container(
-                        width: 180,
-                        decoration: BoxDecoration(
-                          boxShadow: const [
-                            BoxShadow(color: Colors.black12, blurRadius: 4),
-                          ],
-                          borderRadius: BorderRadius.circular(8),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: LegendWidget(
+                                controller: _controller,
+                                title: 'Legend',
+                                showLayers: _showLayers,
+                                showHeatmap: _showHeatmap,
+                                showSelection: false,
+                                tileColor: isDark
+                                    ? const Color(0xFF1E293B)
+                                    : Colors.white,
+                                contentPadding: const EdgeInsets.all(8),
+                                textStyle: const TextStyle(fontSize: 10),
+                                titleStyle: const TextStyle(
+                                    fontSize: 11, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
                         ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: LegendWidget(
-                            controller: _controller,
-                            title: 'Legend',
-                            showLayers: _showLayers,
-                            showHeatmap: _showHeatmap,
-                            showSelection: false,
-                            tileColor: isDark ? const Color(0xFF1E293B) : Colors.white,
-                            contentPadding: const EdgeInsets.all(8),
-                            textStyle: const TextStyle(fontSize: 10),
-                            titleStyle: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+
+                      // Zoom Controls HUD
+                      Positioned(
+                        right: 8,
+                        bottom: 8,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color:
+                                isDark ? const Color(0xFF1E293B) : Colors.white,
+                            borderRadius: BorderRadius.circular(8),
+                            border:
+                                Border.all(color: Colors.grey.withOpacity(0.2)),
+                            boxShadow: const [
+                              BoxShadow(color: Colors.black12, blurRadius: 4),
+                            ],
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.add, size: 18),
+                                onPressed: _controller.zoomIn,
+                                constraints: const BoxConstraints(
+                                    minWidth: 36, minHeight: 36),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.remove, size: 18),
+                                onPressed: _controller.zoomOut,
+                                constraints: const BoxConstraints(
+                                    minWidth: 36, minHeight: 36),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.refresh, size: 18),
+                                onPressed: _controller.resetView,
+                                constraints: const BoxConstraints(
+                                    minWidth: 36, minHeight: 36),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    ),
 
-                  // Zoom Controls HUD
-                  Positioned(
-                    right: 8,
-                    bottom: 8,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: isDark ? const Color(0xFF1E293B) : Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.grey.withOpacity(0.2)),
-                        boxShadow: const [
-                          BoxShadow(color: Colors.black12, blurRadius: 4),
-                        ],
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.add, size: 18),
-                            onPressed: _controller.zoomIn,
-                            constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
+                      // Hover Status HUD (only on hover / desktop)
+                      if (!isMobile && _hovered != null)
+                        Positioned(
+                          top: 8,
+                          right: 8,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: isDark
+                                  ? const Color(0xFF1E293B)
+                                  : Colors.white,
+                              borderRadius: BorderRadius.circular(4),
+                              border: Border.all(
+                                  color: Colors.grey.withOpacity(0.2)),
+                            ),
+                            child: Text(
+                              _hovered!,
+                              style: const TextStyle(
+                                  fontSize: 11, fontWeight: FontWeight.bold),
+                            ),
                           ),
-                          IconButton(
-                            icon: const Icon(Icons.remove, size: 18),
-                            onPressed: _controller.zoomOut,
-                            constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.refresh, size: 18),
-                            onPressed: _controller.resetView,
-                            constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  // Hover Status HUD (only on hover / desktop)
-                  if (_hovered != null)
-                    Positioned(
-                      top: 8,
-                      right: 8,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: isDark ? const Color(0xFF1E293B) : Colors.white,
-                          borderRadius: BorderRadius.circular(4),
-                          border: Border.all(color: Colors.grey.withOpacity(0.2)),
                         ),
-                        child: Text(
-                          _hovered!,
-                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-            ),
-          ),
-
-          // Bottom Details Panel (shown when a district/province is selected)
-          if (_controller.selectedDistricts.isNotEmpty || _controller.selectedProvinces.isNotEmpty)
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: isDark ? const Color(0xFF1E293B) : Colors.white,
-                border: Border(
-                  top: BorderSide(
-                    color: isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0),
-                    width: 1,
+                    ],
                   ),
                 ),
               ),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: _buildFloatingDetailsCard(isDark),
-              ),
-            ),
-        ],
+
+              // Bottom Details Panel (shown when a district/province is selected)
+              if (_controller.selectedDistricts.isNotEmpty ||
+                  _controller.selectedProvinces.isNotEmpty)
+                Container(
+                  padding: EdgeInsets.all(isMobile ? 8.0 : 12.0),
+                  decoration: BoxDecoration(
+                    color: isDark ? const Color(0xFF1E293B) : Colors.white,
+                    border: Border(
+                      top: BorderSide(
+                        color: isDark
+                            ? const Color(0xFF334155)
+                            : const Color(0xFFE2E8F0),
+                        width: 1,
+                      ),
+                    ),
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: _buildFloatingDetailsCard(isDark),
+                  ),
+                ),
+            ],
+          );
+        },
       ),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
